@@ -1,12 +1,31 @@
 // Создаём роут для запросов пользователей
 const usersRouter = require("express").Router();
+const {
+  sendAllUsers,
+  sendUserById,
+  sendMe,
+  sendUserCreated,
+  sendUserUpdated,
+  sendUserDeleted,
+} = require("../controllers/users");
+const { checkAuth } = require("../middlewares/auth");
 
 // Импортируем вспомогательные функции
-const findAllUsers = require("../middlewares/users");
+const {
+  findAllUsers,
+  filterPassword,
+  findUserById,
+  checkEmptyNameAndEmailAndPassword,
+  hashPassword,
+  createUser,
+  checkEmptyNameAndEmail,
+  updateUser,
+  deleteUser,
+  checkIsUserExists,
+} = require("../middlewares/users");
 usersRouter.get("/users", findAllUsers, filterPassword, sendAllUsers);
 usersRouter.get("/users/:id", findUserById, filterPassword, sendUserById);
 usersRouter.get("/me", checkAuth, sendMe);
-const sendAllUsers = require("../controllers/users");
 
 // Обрабатываем GET-запрос с роутом '/users'
 

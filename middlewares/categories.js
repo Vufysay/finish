@@ -93,11 +93,36 @@ const checkEmptyName = async (req, res, next) => {
   }
 };
 
+const sendCategoryById = (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(req.category));
+};
+
+const sendCategoryCreated = (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(req.category));
+};
+
+const sendCategoryUpdated = (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.end("Category updated");
+};
+
+const sendCategoryDeleted = (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(req.category));
+};
 // Экспортируем функцию поиска всех категорий
-((module.exports = findAllCategories),
-findCategoryById,
-updateCategory,
-deleteCategory,
-checkIsCategoryExists,
-checkEmptyName),
-  createCategory;
+module.exports = {
+  findAllCategories,
+  findCategoryById,
+  updateCategory,
+  deleteCategory,
+  checkIsCategoryExists,
+  checkEmptyName,
+  createCategory,
+  sendCategoryById,
+  sendCategoryCreated,
+  sendCategoryUpdated,
+  sendCategoryDeleted,
+};

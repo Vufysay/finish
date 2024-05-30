@@ -85,13 +85,14 @@ const filterPassword = (req, res, next) => {
   const filterUser = (user) => {
     const { password, ...userWithoutPassword } = user.toObject();
     return userWithoutPassword;
-    if (req.user) {
-      req.user = filterUser(req.user);
-    }
-    if (req.usersArray) {
-      req.usersArray = req.usersArray.map((user) => filterUser(user));
-    }
   };
+  if (req.user) {
+    req.user = filterUser(req.user);
+  }
+  if (req.usersArray) {
+    req.usersArray = req.usersArray.map((user) => filterUser(user));
+  }
+
   next();
 };
 
@@ -111,13 +112,29 @@ const hashPassword = async (req, res, next) => {
   }
 };
 
+const checkIsUserExists = async (req, res, next) => {
+  const isInArray = req.usersArray.find((user) => {
+    return req.body.email === user.email;
+  });
+  if (isInArray) {
+    res
+      .status(400)
+      .send({ message: "Пользователь с таким email уже существует" });
+  } else {
+    next();
+  }
+};
+
 // Экспортируем функцию поиска всех пользователей
-((module.exports = findAllUsers),
-findUserById,
-updateUser,
-deleteUser,
-checkEmptyNameAndEmailAndPassword,
-checkEmptyNameAndEmail,
-filterPassword,
-hashPassword),
-  createUser;
+module.exports = {
+  findAllUsers,
+  findUserById,
+  updateUser,
+  deleteUser,
+  checkEmptyNameAndEmailAndPassword,
+  checkEmptyNameAndEmail,
+  filterPassword,
+  hashPassword,
+  createUser,
+  checkIsUserExists,
+};

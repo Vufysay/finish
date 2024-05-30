@@ -2,11 +2,13 @@
 // Другие импорты
 const jwt = require("jsonwebtoken");
 const path = require("path");
+const users = require("../models/user.js");
 
 // Импорты
 
 const login = (req, res) => {
   const { email, password } = req.body;
+  console.log("text");
 
   users
     .findUserByCredentials(email, password)
@@ -23,6 +25,9 @@ const login = (req, res) => {
         email: user.email,
         jwt: token,
       });
+    })
+    .catch((error) => {
+      res.status(401).send({ message: error.message });
     });
   // Остальной код
 };

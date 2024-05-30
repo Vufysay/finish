@@ -34,9 +34,11 @@ const sendMe = (req, res) => {
 };
 
 // Экспортируем контроллер
-((module.exports = sendAllUsers),
-sendUserById,
-sendUserUpdated,
-sendUserDeleted,
-sendMe),
-  sendUserCreated;
+module.exports = {
+  sendAllUsers,
+  sendUserById,
+  sendUserUpdated,
+  sendUserDeleted,
+  sendMe,
+  sendUserCreated,
+};

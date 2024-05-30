@@ -8,7 +8,8 @@ const cookieParser = require("cookie-parser");
 
 const connectToDatabase = require("./database/connect");
 const cors = require("./middlewares/cors");
-const pagesRouter = require("./routes/pages");
+const { pagesRouter } = require("./routes/pages");
+const apiRouter = require("./routes/api");
 
 const app = express();
 const PORT = 3000;

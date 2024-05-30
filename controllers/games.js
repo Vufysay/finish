@@ -31,8 +31,10 @@ const sendGameDeleted = (req, res) => {
   res.end(JSON.stringify(req.game));
 };
 
-((module.exports = sendAllGames),
-sendGameById,
-sendGameUpdated,
-sendGameDeleted),
-  sendGameCreated;
+module.exports = {
+  sendAllGames,
+  sendGameById,
+  sendGameUpdated,
+  sendGameDeleted,
+  sendGameCreated,
+};
